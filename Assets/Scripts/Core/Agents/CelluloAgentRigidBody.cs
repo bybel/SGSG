@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using UnityEngine;
 
@@ -13,37 +13,35 @@ public class CelluloAgentRigidBody : CelluloAgent
     {
         base.Awake();
         _rigidBody = GetComponent<Rigidbody>();
-        GhostSheepBehavior sheepScript = gameObject.GetComponent<GhostSheepBehavior>();
-
     }
 
     protected override void FixedUpdate()
     {
+        base.FixedUpdate();
         if (steering.linear.sqrMagnitude == 0.0f)
             _rigidBody.velocity = Vector3.zero; 
         else
-        {
+        {   //apply force only if we are not at the maximum speed
             if(_rigidBody.velocity.sqrMagnitude<maxSpeed*maxSpeed)
                 _rigidBody.AddForce(Vector3.ClampMagnitude(steering.linear, maxAccel));
+            else //else break a bit
+            {
+                float brakeSpeed = _rigidBody.velocity.magnitude - maxSpeed;  // calculate the speed decrease
+            
+                Vector3 normalisedVelocity = _rigidBody.velocity.normalized;
+                Vector3 brakeVelocity = normalisedVelocity * maxAccel;  // make the brake Vector3 value
+                _rigidBody.AddForce(-brakeVelocity);  // apply opposing brake force
+            }
         }
-
-        base.FixedUpdate();
-
     }
     public override void LateUpdate()
     {
 
         rotation += steering.angular * Time.deltaTime;
         rotation = rotation > maxRotation ? maxRotation : rotation;
-
+        
         rotation = steering.angular == 0.0f ? 0.0f : rotation;
         velocity = transform.parent.InverseTransformDirection(_rigidBody.velocity);
-
-
-        GhostSheepBehavior sheepScript = gameObject.GetComponent<GhostSheepBehavior>();
-       // if(sheepScript.isSheep) {
-            
-        //}//
 
     }
 

@@ -13,14 +13,14 @@ public class GameMechanics : MonoBehaviour
     public bool isPlaying;
     public GameObject inGameCanvas;
     public GameObject gameOver;
+    private float setVolume;
     // Start is called before the first frame update
     void Start()
     {
-        timer = 120.0f;
         isPlaying = false;
-        inGameCanvas = GameObject.FindGameObjectWithTag("inGameCanvas");
+        inGameCanvas = FirstWithTag(Resources.FindObjectsOfTypeAll<GameObject>(), "inGameCanvas");
         gameOver = FirstWithTag(Resources.FindObjectsOfTypeAll<GameObject>(), "gameOverCanvas");
-        //game_pause();
+        setVolume = AudioListener.volume;
     }   
 
     private GameObject FirstWithTag(GameObject[] tab, string tag)
@@ -37,8 +37,8 @@ public class GameMechanics : MonoBehaviour
     {
         if(timer < 0 && isPlaying) 
         {
-            inGameCanvas.SetActive(false);
             gameOver.SetActive(true);
+            inGameCanvas.SetActive(false);
             game_pause();
         }
         if (isPlaying) timer -= Time.deltaTime;
@@ -64,6 +64,7 @@ public class GameMechanics : MonoBehaviour
         GameObject p2 = FirstWithTag(Resources.FindObjectsOfTypeAll<GameObject>(), "Player2");
         GameObject sheep = FirstWithTag(Resources.FindObjectsOfTypeAll<GameObject>(), "Sheep");
         GameObject mid = FirstWithTag(Resources.FindObjectsOfTypeAll<GameObject>(), "mid");
+        GameObject gem = FirstWithTag(Resources.FindObjectsOfTypeAll<GameObject>(), "Gem");
 
         float xmid = mid.transform.position.x;
         float ymid = mid.transform.position.y;
@@ -80,7 +81,10 @@ public class GameMechanics : MonoBehaviour
         p1.GetComponent<PlayerScore>().score = 0;
         p2.GetComponent<PlayerScore>().score = 0;
         sheep.GetComponent<GhostSheepBehavior>().timer = 0;
-        sheep.GetComponent<GhostSheepBehavior>().isSheep = true; 
+        sheep.GetComponent<GhostSheepBehavior>().isSheep = true;
+         
+        gem.GetComponent<GemSpawner>().desactive();
+
         isPlaying = false;
     }
 
@@ -95,6 +99,38 @@ public class GameMechanics : MonoBehaviour
             }
         }
         return null;
+    }
+
+    public void timer30(){timer = 30;}
+    
+    public void timer60(){timer = 60;}
+    
+    public void timer90(){timer = 90;}
+
+    public void timer120(){timer = 120;}
+    
+    public void timer150(){timer = 150;}
+    
+    public void timer180(){timer = 180;}
+
+    public void pause(){
+        isPlaying = false;
+    }
+
+    public void resume(){
+        isPlaying = true;
+    }
+
+    public void mute(){
+        AudioListener.volume = 0;
+    }
+
+    public void unmute(){
+        if(AudioListener.volume == 0){
+            AudioListener.volume = 1;
+        }else{
+            AudioListener.volume = setVolume;
+        }
     }
 
 }

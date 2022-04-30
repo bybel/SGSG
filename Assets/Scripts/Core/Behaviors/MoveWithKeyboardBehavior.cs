@@ -8,9 +8,17 @@ public enum InputKeyboard
     arrows = 0,
     wasd = 1
 }
+
+public enum InputColor
+{
+    blue = 0,
+    purple = 1
+}
+
 public class MoveWithKeyboardBehavior : AgentBehaviour
 {
     public InputKeyboard inputKeyboard;
+    public InputColor inputColor;
 
     public override Steering GetSteering()
     {
@@ -44,7 +52,7 @@ public class MoveWithKeyboardBehavior : AgentBehaviour
 
     private void setColor()
     {
-        if (gameObject.tag.Equals("Player1"))
+        if (inputColor == InputColor.blue)
         {
             agent.SetVisualEffect(VisualEffect.VisualEffectConstAll, Color.blue, 0);
         }
@@ -53,5 +61,21 @@ public class MoveWithKeyboardBehavior : AgentBehaviour
             agent.SetVisualEffect(VisualEffect.VisualEffectConstAll, Color.magenta, 0);
         }
 
+    }
+
+    public void setCmdWASD(){
+        inputKeyboard = InputKeyboard.wasd;
+    }
+    
+    public void setCmdArrows(){
+        inputKeyboard = InputKeyboard.arrows;
+    }
+
+    public void setColorBlue(){
+        inputColor = InputColor.blue;
+    }
+
+    public void setColorPurple(){
+        inputColor = InputColor.purple;
     }
 }

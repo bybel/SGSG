@@ -19,6 +19,8 @@ TagManager:
   - inGameCanvas
   - gameOverCanvas
   - GameOver
+  - Gem
+  - GemObject
   layers:
   - Default
   - TransparentFX

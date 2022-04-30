@@ -24,10 +24,10 @@ public class DisplayWinner : MonoBehaviour
         s1 = gameMechanics.p1Score;
         s2 = gameMechanics.p2Score;
         if(s1 < s2) {
-            winner.text = "Blue";
+            winner.text = "Player 2";
         }
         else if(s1 > s2) {
-            winner.text = "Purple";
+            winner.text = "Player 1";
         }
         else {
 

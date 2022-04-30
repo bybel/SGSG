@@ -25,7 +25,7 @@ public class ScoreDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        s1.GetComponent<TMPro.TextMeshProUGUI>().text = "Blue : " + score1Script.getScore();
-        s2.GetComponent<TMPro.TextMeshProUGUI>().text = "Purple : " + score2Script.getScore();
+        s1.GetComponent<TMPro.TextMeshProUGUI>().text = "Player 1 : " + score1Script.getScore();
+        s2.GetComponent<TMPro.TextMeshProUGUI>().text = "Player 2 : " + score2Script.getScore();
     }
 }
