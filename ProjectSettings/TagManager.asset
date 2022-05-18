@@ -23,6 +23,18 @@ TagManager:
   - GemObject
   - start
   - InGameButtons
+  - sRed
+  - sPink
+  - sBlue
+  - sOrange
+  - sGreen
+  - sYellow
+  - Bpink
+  - Bred
+  - Bgreen
+  - Bblue
+  - Byellow
+  - Borange
   layers:
   - Default
   - TransparentFX
