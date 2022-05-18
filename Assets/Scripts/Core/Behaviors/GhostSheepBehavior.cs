@@ -64,6 +64,9 @@ public class GhostSheepBehavior : AgentBehaviour
                 AudioSource.PlayClipAtPoint(isSheep ? sheepSound.clip : wolfSound.clip, transform.position);
             }
         }
+        else {
+            return new Steering();
+        }
         return gameScript.isPlaying ? steering : new Steering();
     }
 

@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class GameMechanics : MonoBehaviour
 {
-    GameObject bluePlayer;
-    GameObject purplePlayer;
     GameObject timerObj;
     public float timer;
     public int p1Score;
@@ -17,6 +15,7 @@ public class GameMechanics : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        timer = 120.0f;
         isPlaying = false;
         inGameCanvas = FirstWithTag(Resources.FindObjectsOfTypeAll<GameObject>(), "inGameCanvas");
         gameOver = FirstWithTag(Resources.FindObjectsOfTypeAll<GameObject>(), "gameOverCanvas");
@@ -56,6 +55,7 @@ public class GameMechanics : MonoBehaviour
     public void game_init()
     {
         isPlaying = true;
+        timer = 120.0f;
     }
 
     public void game_pause()
@@ -75,8 +75,6 @@ public class GameMechanics : MonoBehaviour
         p1.transform.position = new Vector3(xmid - 9.0f, y, zmid - 3.0f);
         p2.transform.position = new Vector3(xmid + 9.0f, y, zmid - 3.0f);
         sheep.transform.position = new Vector3(xmid, y, zmid + 3.0f);
-
-        timer = 120.0f;
 
         p1.GetComponent<PlayerScore>().score = 0;
         p2.GetComponent<PlayerScore>().score = 0;

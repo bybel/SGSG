@@ -21,6 +21,8 @@ TagManager:
   - GameOver
   - Gem
   - GemObject
+  - start
+  - InGameButtons
   layers:
   - Default
   - TransparentFX

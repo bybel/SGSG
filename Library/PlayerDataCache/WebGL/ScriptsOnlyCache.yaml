@@ -112,69 +112,69 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1770}
     - Class: 114
-      Script: {instanceID: 2058}
+      Script: {instanceID: 1804}
     - Class: 114
-      Script: {instanceID: 2294}
+      Script: {instanceID: 2060}
     - Class: 114
-      Script: {instanceID: 2370}
+      Script: {instanceID: 2296}
     - Class: 114
-      Script: {instanceID: 2410}
+      Script: {instanceID: 2372}
     - Class: 114
-      Script: {instanceID: 2480}
+      Script: {instanceID: 2412}
     - Class: 114
-      Script: {instanceID: 2494}
+      Script: {instanceID: 2482}
     - Class: 114
-      Script: {instanceID: 2538}
+      Script: {instanceID: 2496}
     - Class: 114
-      Script: {instanceID: 2562}
+      Script: {instanceID: 2540}
     - Class: 114
-      Script: {instanceID: 2708}
+      Script: {instanceID: 2564}
     - Class: 114
-      Script: {instanceID: 2856}
+      Script: {instanceID: 2710}
     - Class: 114
-      Script: {instanceID: 2866}
+      Script: {instanceID: 2858}
     - Class: 114
-      Script: {instanceID: 2930}
+      Script: {instanceID: 2868}
     - Class: 114
-      Script: {instanceID: 2944}
+      Script: {instanceID: 2932}
     - Class: 114
-      Script: {instanceID: 3092}
+      Script: {instanceID: 2946}
     - Class: 114
-      Script: {instanceID: 3102}
+      Script: {instanceID: 3094}
     - Class: 114
-      Script: {instanceID: 3212}
+      Script: {instanceID: 3104}
     - Class: 114
-      Script: {instanceID: 3464}
+      Script: {instanceID: 3214}
     - Class: 114
-      Script: {instanceID: 3486}
+      Script: {instanceID: 3466}
     - Class: 114
-      Script: {instanceID: 3692}
+      Script: {instanceID: 3488}
     - Class: 114
-      Script: {instanceID: 3832}
+      Script: {instanceID: 3694}
     - Class: 114
-      Script: {instanceID: 3928}
+      Script: {instanceID: 3834}
     - Class: 114
-      Script: {instanceID: 3994}
+      Script: {instanceID: 3930}
     - Class: 114
-      Script: {instanceID: 4082}
+      Script: {instanceID: 3996}
     - Class: 114
-      Script: {instanceID: 4172}
+      Script: {instanceID: 4084}
     - Class: 114
-      Script: {instanceID: 4176}
+      Script: {instanceID: 4174}
     - Class: 114
-      Script: {instanceID: 4196}
+      Script: {instanceID: 4178}
     - Class: 114
-      Script: {instanceID: 4208}
+      Script: {instanceID: 4198}
     - Class: 114
-      Script: {instanceID: 4260}
+      Script: {instanceID: 4210}
     - Class: 114
-      Script: {instanceID: 4370}
+      Script: {instanceID: 4262}
     - Class: 114
-      Script: {instanceID: 4514}
+      Script: {instanceID: 4372}
     - Class: 114
-      Script: {instanceID: 4520}
+      Script: {instanceID: 4516}
     - Class: 114
-      Script: {instanceID: 57662}
+      Script: {instanceID: 4522}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -284,6 +284,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_FontAsset
+  - hash:
+      serializedVersion: 2
+      Hash: cbd5458b5f3eab34c091efb37df4212d
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ActivateIfCanvas
   - hash:
       serializedVersion: 2
       Hash: 9ff06d593e149cb4e078353470940480
@@ -794,12 +800,6 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MainMenu
-  - hash:
-      serializedVersion: 2
-      Hash: cbd5458b5f3eab34c091efb37df4212d
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: ActivateIfCanvas
   platform: 20
   scenePathNames:
   - Assets/Scenes/SpaceGhostSheepGame.unity

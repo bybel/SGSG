@@ -249,7 +249,7 @@ public class ControlPanel : MonoBehaviour
         if (robot != null)
         {
             robot.SetLEDResponseMode(LEDResponseModeDropdown.value);
-            robot.SetVisualEffect(visualEffectDropdown.value, (long)(redSlider.value * 255), (long)(greenSlider.value * 255), (long) (blueSlider.value * 255), colorValue);
+            robot.SetVisualEffect(visualEffectDropdown.value, (long)(redSlider.value * 255), (long)(greenSlider.value * 255), (long) (blueSlider.value * 255), 1);
         }
     }
 
