@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/SpaceGhostSheepGame.unity
+- path: Assets/Scenes/GalacticKing.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
