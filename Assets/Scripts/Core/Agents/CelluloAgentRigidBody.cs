@@ -17,12 +17,11 @@ public class CelluloAgentRigidBody : CelluloAgent
     {
         base.Awake();
         _rigidBody = GetComponent<Rigidbody>();
-        if(!gameObject.tag.Equals("Sheep")){
-            agent = gameObject.GetComponent<CelluloAgent>();
-            gSB = ghost.GetComponent<GhostSheepBehavior>();
+        /*/if(!gameObject.tag.Equals("Sheep")){
+         ////    gSB = ghost.GetComponent<GhostSheepBehavior>();
             agent.ClearHapticFeedback();
             agent.SetCasualBackdriveAssistEnabled(true);
-        }
+        }*/
     }
 
     protected override void FixedUpdate()
