@@ -37,11 +37,15 @@ public class MoveWithKeyboardBehavior : AgentBehaviour
             if(chCmd) {
                 if (inputKeyboard == InputKeyboard.arrows)
                 {
+                                    Debug.Log("AAAAAA");
+
                     horizontal = Input.GetAxis("Horizontal");
                     vertical = Input.GetAxis("Vertical");
                 }
                 else
                 {
+                                    Debug.Log("BBBBBBB");
+
                     horizontal = Input.GetAxis("H2");
                     vertical = Input.GetAxis("V2");
                 }
