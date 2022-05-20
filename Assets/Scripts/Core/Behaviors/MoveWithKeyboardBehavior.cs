@@ -15,16 +15,16 @@ public enum InputColor {
 public class MoveWithKeyboardBehavior : AgentBehaviour {
     public InputKeyboard inputKeyboard;
     public InputColor inputColor;
+    public GameObject theGame;
 
     //    private static bool chColor = false;
     //    private static bool chCmd = false;
 
     public override Steering GetSteering()
     {   
-        //        GameMechanics gameScript = GameObject.FindGameObjectWithTag("GameMechanics").GetComponent<GameMechanics>();
         Steering steering = new Steering();
-//        if (gameScript.isPlaying)
-//        {
+        if (theGame.GetComponent<GMKMechanics>().isPlaying)
+        {
             //implement your code here
 
             float horizontal;
@@ -57,39 +57,18 @@ public class MoveWithKeyboardBehavior : AgentBehaviour {
 
             steering.linear = new Vector3(horizontal, 0, vertical) * agent.maxAccel;
             steering.linear = this.transform.parent.TransformDirection(Vector3.ClampMagnitude(steering.linear, agent.maxAccel));
-//        }
+        }
 
         return steering;
     }
 
     public void setColor()
     { 
-//        if(chColor){
-/**            if (inputColor == InputColor.blue)
-            {
-                agent.SetVisualEffect(VisualEffect.VisualEffectConstAll, Color.blue, 0);
-            }
-            else
-            {
-                agent.SetVisualEffect(VisualEffect.VisualEffectConstAll, Color.magenta, 0);
-            }*/
-/**        }
-        else 
-        {*/
-            if (gameObject.tag.Equals("Player1"))
-            {
-                agent.SetVisualEffect(VisualEffect.VisualEffectConstAll, new Color(1, 0.5f, 0, 1), 0);
-            }
-            else
-            {
-                agent.SetVisualEffect(VisualEffect.VisualEffectConstAll, Color.magenta, 0);
-            }
-//        }
-
+        agent.SetVisualEffect(VisualEffect.VisualEffectConstAll, Color.white, 0);
     }
 
     public void setColor(int color){
-        Debug.Log(gameObject.tag + " " + color);
+
         switch(color) {
             case 0: agent.SetVisualEffect(VisualEffect.VisualEffectConstAll, Color.blue, 0); break;
             case 1: agent.SetVisualEffect(VisualEffect.VisualEffectConstAll, Color.green, 0); break;

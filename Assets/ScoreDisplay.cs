@@ -4,19 +4,18 @@ using UnityEngine;
 
 public class ScoreDisplay : MonoBehaviour
 {
-    GameObject p1;
-    GameObject p2;
-    GameObject s1;
-    GameObject s2;
-    PlayerScore score1Script;
-    PlayerScore score2Script;
-    GameMechanics gameScript;
+    public GameObject theGame;
+    private GameObject p1;
+    private GameObject p2;
+    private GameObject s1;
+    private GameObject s2;
+    private PlayerScore score1Script;
+    private PlayerScore score2Script;
+    private GMKMechanics gameScript;
     // Start is called before the first frame update
     void Start()
     {
-        gameScript = GameObject.FindGameObjectWithTag("GameMechanics").GetComponent<GameMechanics>();
-
-        
+        gameScript = theGame.GetComponent<GMKMechanics>();
     }
 
     // Update is called once per frame
@@ -31,8 +30,8 @@ public class ScoreDisplay : MonoBehaviour
 
             score1Script = p1.GetComponent<PlayerScore>();
             score2Script = p2.GetComponent<PlayerScore>();
-            s1.GetComponent<TMPro.TextMeshProUGUI>().text = "Player 1 : " + score1Script.getScore();
-            s2.GetComponent<TMPro.TextMeshProUGUI>().text = "Player 2 : " + score2Script.getScore();
+            s1.GetComponent<TMPro.TextMeshProUGUI>().text = "Player 1 : " + gameScript.p1Score;
+            s2.GetComponent<TMPro.TextMeshProUGUI>().text = "Player 2 : " + gameScript.p2Score;
         }
     }
 }

@@ -7,21 +7,12 @@ using UnityEngine;
 /// </summary>
 public class CelluloAgentRigidBody : CelluloAgent
 {
-    public bool hasLongPressed;///////////////////////////LIGNE RAJOUTEE
     private Rigidbody _rigidBody;
-    private CelluloAgent agent;
-    public GameObject ghost;
-    private GhostSheepBehavior gSB;
 
     protected override void Awake()
     {
         base.Awake();
         _rigidBody = GetComponent<Rigidbody>();
-        /*/if(!gameObject.tag.Equals("Sheep")){
-         ////    gSB = ghost.GetComponent<GhostSheepBehavior>();
-            agent.ClearHapticFeedback();
-            agent.SetCasualBackdriveAssistEnabled(true);
-        }*/
     }
 
     protected override void FixedUpdate()
@@ -42,15 +33,6 @@ public class CelluloAgentRigidBody : CelluloAgent
                 _rigidBody.AddForce(-brakeVelocity);  // apply opposing brake force
             }
         }
-        if(!gameObject.tag.Equals("Sheep")){
-            if(gSB.isSheep){
-                agent.ClearHapticFeedback();
-                agent.SetCasualBackdriveAssistEnabled(true);
-                agent.MoveOnIce();
-            } else{
-                agent.MoveOnStone();
-            }
-        }
     }
     public override void LateUpdate()
     {
@@ -62,11 +44,7 @@ public class CelluloAgentRigidBody : CelluloAgent
         velocity = transform.parent.InverseTransformDirection(_rigidBody.velocity);
 
     }
-
-    void OnCelluloLongTouch() {
-        hasLongPressed = true;
-    }
-
+ 
     
 
 }

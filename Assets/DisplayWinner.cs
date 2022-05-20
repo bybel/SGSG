@@ -6,23 +6,22 @@ public class DisplayWinner : MonoBehaviour
 {
     int s1;
     int s2;
-    GameMechanics gameMechanics;
+    public GameObject theGame;
+    GMKMechanics mechanicsScript;
     TMPro.TextMeshProUGUI winner;
 
     // Start is called before the first frame update
     void Start()
     {
-        gameMechanics = GameObject.FindGameObjectsWithTag("GameMechanics")[0].GetComponent<GameMechanics>();
+        mechanicsScript = theGame.GetComponent<GMKMechanics>();
         winner = GameObject.FindGameObjectsWithTag("winner")[0].GetComponent<TMPro.TextMeshProUGUI>();
-        
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        s1 = gameMechanics.p1Score;
-        s2 = gameMechanics.p2Score;
+        s1 = mechanicsScript.p1Score;
+        s2 = mechanicsScript.p2Score;
         if(s1 < s2) {
             winner.text = "Player 2";
         }

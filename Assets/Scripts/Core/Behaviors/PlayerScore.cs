@@ -5,16 +5,16 @@ using UnityEngine;
 public class PlayerScore : MonoBehaviour
 {
     public int score;
-    public AudioSource winSound;
-    public AudioSource loseSound;
-    public GameMechanics gameMechanics;
+//    public AudioSource winSound;
+//    public AudioSource loseSound;
+//    public GameMechanics gameMechanics;
     private PlayerScore other;
     private bool ateGem;
 
     // Start is called before the first frame update
     void Start()
     {
-        gameMechanics = GameObject.FindGameObjectsWithTag("GameMechanics")[0].GetComponent<GameMechanics>();
+//        gameMechanics = GameObject.FindGameObjectsWithTag("GameMechanics")[0].GetComponent<GameMechanics>();
         score = 0;
         if (gameObject.tag.Equals("Player1")){
             other = GameObject.FindGameObjectWithTag("Player2").GetComponent<PlayerScore>();
@@ -31,14 +31,14 @@ public class PlayerScore : MonoBehaviour
     public void incrementScore()
     {
         score++;
-        AudioSource.PlayClipAtPoint(winSound.clip, transform.position);
-        gameMechanics.keepScore(gameObject);
+//        AudioSource.PlayClipAtPoint(winSound.clip, transform.position);
+//        gameMechanics.keepScore(gameObject);
     }
     public void decrementScore()
     {
         score--;
-        AudioSource.PlayClipAtPoint(loseSound.clip, transform.position);
-        gameMechanics.keepScore(gameObject);
+//        AudioSource.PlayClipAtPoint(loseSound.clip, transform.position);
+//        gameMechanics.keepScore(gameObject);
     }
 
     public int getScore() {
@@ -46,7 +46,7 @@ public class PlayerScore : MonoBehaviour
     }
 
     void OnCollisionEnter(Collision collision){
-        if(collision.gameObject.tag.Equals("GemObject")) {
+/**        if(collision.gameObject.tag.Equals("GemObject")) {
             GemSpawner gs = GameObject.FindGameObjectWithTag("Gem").GetComponent<GemSpawner>();
             gs.desactive();
             gs.playDestroyAudio();
@@ -59,6 +59,6 @@ public class PlayerScore : MonoBehaviour
             other.decrementScore();
             other.decrementScore();
             ateGem = false;
-        }
+        }*/
     }
 }

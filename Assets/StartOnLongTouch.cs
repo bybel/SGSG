@@ -33,7 +33,7 @@ public class StartOnLongTouch : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+/**
         if(cStart1.hasLongPressed && cStart2.hasLongPressed) {
             startButton.SetActive(false);
             Choices.SetActive(false);
@@ -48,6 +48,6 @@ public class StartOnLongTouch : MonoBehaviour
             gameMechanics.game_init();
             cStart1.hasLongPressed = false;
             cStart2.hasLongPressed = false;
-        }
+        }*/
     }
 }

@@ -19,21 +19,26 @@ public class RingTrigger : MonoBehaviour
     }
     
     void OnTriggerEnter(Collider other){
-        if(other.tag.Equals("Player1")){
+        if(other.transform.parent.tag.Equals("Player1")){
+            Debug.Log(gameObject.name);
             contained[0] = true;
         } 
-        if (other.tag.Equals("Player2")){
+        if (other.transform.parent.tag.Equals("Player2")){
             contained[1] = true;
         }
     }
 
     void OnTriggerExit(Collider other){
-        Debug.Log("*OEEEEE");
-        if(other.tag.Equals("Player1")){
+        if(other.transform.parent.tag.Equals("Player1")){
             contained[0] = false;
         } 
-        if (other.tag.Equals("Player2")){
+        if (other.transform.parent.tag.Equals("Player2")){
             contained[1] = false;
         }
+    }
+
+    public bool contains(int player)
+    {
+        return contained[player];
     }
 }
