@@ -39,6 +39,8 @@ public class GMKMechanics : MonoBehaviour
     private MoveWithKeyboardBehavior key1;
     private MoveWithKeyboardBehavior key2;
     private ObstacleBehavior obstacle;
+    private int straight1;
+    private int straight2;
 
     // Start is called before the first frame update
     void Start()
@@ -48,6 +50,8 @@ public class GMKMechanics : MonoBehaviour
         timerStart = 0f;
         round = 0;
         roundMax = 5;
+        straight1 = 0;
+        straight2 = 0;
         isPlaying = false;
         setVolume = AudioListener.volume;
         rd = new Random();
@@ -96,14 +100,18 @@ public class GMKMechanics : MonoBehaviour
             if(checkPosition(i, colors[i, colorInRound-1]))
             {
                 if(i==0){
-                    ++p1Score;
+                    p1Score += ++straight1;
                 } else{
-                    ++p2Score;
+                    p2Score += ++straight2;
                 }
                 //make victory noise
             }else
             {
-                // make defeat noise 
+                if(i==0){
+                    straight1 = 0;
+                } else{
+                    straight2 = 0;
+                }
             }
         }
     }
@@ -185,8 +193,10 @@ public class GMKMechanics : MonoBehaviour
     public void loosePoint(string tag){
         if(tag.Equals("Player1")){
             --p1Score;
+            straight1 = 0;
         } else {
             --p2Score;
+            straight2 = 0;
         }
     }
 

@@ -64,7 +64,7 @@ public class MoveWithKeyboardBehavior : AgentBehaviour {
 
     public void setColor()
     { 
-        agent.SetVisualEffect(VisualEffect.VisualEffectConstAll, Color.white, 0);
+        agent.SetVisualEffect(VisualEffect.VisualEffectProgress, Color.white, 43);
     }
 
     public void setColor(int color){
