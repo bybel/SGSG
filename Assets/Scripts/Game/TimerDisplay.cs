@@ -4,17 +4,20 @@ using UnityEngine;
 
 public class TimerDisplay : MonoBehaviour
 {
-    GameMechanics gameScript;
+    public GameObject theGame;
+    private GMKMechanics gameScript;
+    private TMPro.TextMeshProUGUI gui;
+
     // Start is called before the first frame update
     void Start()
     {
-        gameScript = GameObject.FindGameObjectWithTag("GameMechanics").GetComponent<GameMechanics>();
+        gameScript = theGame.GetComponent<GMKMechanics>();
+        gui = gameObject.GetComponent<TMPro.TextMeshProUGUI>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        string time = (int)gameScript.timer / 60 + ":" + (int)gameScript.timer % 60;
-        gameObject.GetComponent<TMPro.TextMeshProUGUI>().text = time;
+        gui.text = "" + gameScript.getTimer();
     }
 }

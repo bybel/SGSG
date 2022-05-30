@@ -20,7 +20,6 @@ public class RingTrigger : MonoBehaviour
     
     void OnTriggerEnter(Collider other){
         if(other.transform.parent.tag.Equals("Player1")){
-            Debug.Log(gameObject.name);
             contained[0] = true;
         } 
         if (other.transform.parent.tag.Equals("Player2")){

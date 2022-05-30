@@ -14,11 +14,14 @@ public class ObstacleBehavior : AgentBehaviour
     private float dis1;
     private float dis2;
     private GMKMechanics gameScript;
+    private bool accel;
 
     // Start is called before the first frame update
     void Start()
     {
         gameScript = theGame.GetComponent<GMKMechanics>();
+        isActive = false;
+        accel = false;
     }
 
     // Update is called once per frame
@@ -27,7 +30,11 @@ public class ObstacleBehavior : AgentBehaviour
         if (isActive){
             locatePlayers();
             closest.Normalize();
-            steering.linear = closest * (agent.maxAccel/7);
+            if(accel){
+                steering.linear = closest * agent.maxAccel;
+            } else {
+                steering.linear = closest * (agent.maxAccel/7);
+            }
             steering.linear = transform.parent.TransformDirection(Vector3.ClampMagnitude(steering.linear, agent.maxAccel));
 
             return steering;
@@ -59,12 +66,12 @@ public class ObstacleBehavior : AgentBehaviour
         }
     }
 
-    public void active(){
-        isActive = true;
+    public void active(bool condition){
+        isActive = condition;
     }
 
-    public void desactive(){
-        isActive = false;
+    public void accelerateObstacle(bool condition){
+        accel = condition;
     }
 
     void OnCollisionEnter(Collision collision)
