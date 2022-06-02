@@ -21,11 +21,11 @@ public class CancelStraightBonus : MonoBehaviour
 
     void OnTriggerEnter(Collider other){
         if(other.transform.parent.tag.Equals("Player1")) {
-            gameScript.cancelStraight(1);
+            gameScript.collected(1, "cancel", gameObject.tag);
             gameObject.SetActive(false);
         }
         if(other.transform.parent.tag.Equals("Player2")) {
-            gameScript.cancelStraight(2);
+            gameScript.collected(2, "cancel", gameObject.tag);
             gameObject.SetActive(false);
         }
     }

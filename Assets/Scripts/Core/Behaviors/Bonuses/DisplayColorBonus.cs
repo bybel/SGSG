@@ -22,13 +22,13 @@ public class DisplayColorBonus : MonoBehaviour
     void OnTriggerEnter(Collider other){
         if(other.transform.parent.tag.Equals("Player1")) {
             if(gameScript.getColorInRound() <= 5) {
-                gameScript.displayColor(1);
+                gameScript.collected(1, "display", gameObject.tag);
             }
             gameObject.SetActive(false);
         }
         if(other.transform.parent.tag.Equals("Player2")) {
             if(gameScript.getColorInRound() <= 5) {
-                gameScript.displayColor(2);
+                gameScript.collected(2, "display", gameObject.tag);
             }
             gameObject.SetActive(false);
         }
