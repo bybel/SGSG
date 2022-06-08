@@ -48,6 +48,7 @@ public class GMKMechanics : MonoBehaviour
     public GameObject xmaxObj;
     public GameObject zminObj;
     public GameObject zmaxObj;
+    public GameObject mid;
 
     public int p1Score;
     public int p2Score;
@@ -81,42 +82,12 @@ public class GMKMechanics : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        colorInRound = 6;
-        timer = 0f;
-        timerStart = 0f;
-        round = 0;
         roundMax = 5;
-        straight1 = 1;
-        straight2 = 1;
-        isPlaying = false;
         setVolume = AudioListener.volume;
         rd = new Random();
         key1 = p1.GetComponent<MoveWithKeyboardBehavior>();
         key2 = p2.GetComponent<MoveWithKeyboardBehavior>();
         obstacle = obstacleObject.GetComponent<ObstacleBehavior>();
-        accelOnCourt = false;
-        xmin = xminObj.transform.position.x;
-        xmax = xmaxObj.transform.position.x;
-        zmin = zminObj.transform.position.z;
-        zmax = zmaxObj.transform.position.z;
-        cancelStraightBonuses[0] = cancelStraightBonus1;
-        cancelStraightBonuses[1] = cancelStraightBonus2;
-        cancelStraightBonuses[2] = cancelStraightBonus3;
-        cancelStraightBonuses[3] = cancelStraightBonus4;
-        cancelStraightBonuses[4] = cancelStraightBonus5;
-        doubleStraightBonuses[0] = doubleStraightBonus1;
-        doubleStraightBonuses[1] = doubleStraightBonus2;
-        doubleStraightBonuses[2] = doubleStraightBonus3;
-        doubleStraightBonuses[3] = doubleStraightBonus4;
-        doubleStraightBonuses[4] = doubleStraightBonus5;
-        displayColorBonuses[0] = displayColorBonus1;
-        displayColorBonuses[1] = displayColorBonus2;
-        displayColorBonuses[2] = displayColorBonus3;
-        displayColorBonuses[3] = displayColorBonus4;
-        displayColorBonuses[4] = displayColorBonus5;
-        nbcancelStraightBonuses = 0;
-        nbdisplayColorBonuses = 0;
-        nbdoubleStraightBonuses = 0;
     }
 
     // Update is called once per frame
@@ -242,11 +213,6 @@ public class GMKMechanics : MonoBehaviour
             }
             timerStart -= Time.deltaTime;
         }
-    }
-
-    public void game_init()
-    {
-        isPlaying = true;
     }
 
     public void loosePoint(string tag){
@@ -424,15 +390,86 @@ public class GMKMechanics : MonoBehaviour
         isPlaying = false;
     }*/
 
+    public void game_pause()
+    {
+        isPlaying = false;
+    }
+
+    public void game_play()
+    {
+        isPlaying = true;
+    }
+
+    public void game_reset() 
+    { 
+        float xmid = mid.transform.position.x;
+        float ymid = mid.transform.position.y;
+        float zmid = mid.transform.position.z;
+
+        float y = p1.transform.position.y;
+
+        p1.transform.position = new Vector3(xmid - 9.0f, y, zmid - 3.0f);
+        p2.transform.position = new Vector3(xmid + 9.0f, y, zmid - 3.0f);
+        obstacleObject.transform.position = new Vector3(xmid, y, zmid + 3.0f);
+
+        p1Score = 0;
+        p2Score = 0;
+
+        isPlaying = false;
+        key1.setColor();
+        key2.setColor();
+
+        colorInRound = 6;
+        timer = 0f;
+        timerStart = 0f;
+        round = 0;
+        roundMax = 5;
+        straight1 = 1;
+        straight2 = 1;
+        rd = new Random();
+        key1 = p1.GetComponent<MoveWithKeyboardBehavior>();
+        key2 = p2.GetComponent<MoveWithKeyboardBehavior>();
+        obstacle = obstacleObject.GetComponent<ObstacleBehavior>();
+        accelOnCourt = false;
+        xmin = xminObj.transform.position.x;
+        xmax = xmaxObj.transform.position.x;
+        zmin = zminObj.transform.position.z;
+        zmax = zmaxObj.transform.position.z;
+        cancelStraightBonuses[0] = cancelStraightBonus1;
+        cancelStraightBonuses[1] = cancelStraightBonus2;
+        cancelStraightBonuses[2] = cancelStraightBonus3;
+        cancelStraightBonuses[3] = cancelStraightBonus4;
+        cancelStraightBonuses[4] = cancelStraightBonus5;
+        doubleStraightBonuses[0] = doubleStraightBonus1;
+        doubleStraightBonuses[1] = doubleStraightBonus2;
+        doubleStraightBonuses[2] = doubleStraightBonus3;
+        doubleStraightBonuses[3] = doubleStraightBonus4;
+        doubleStraightBonuses[4] = doubleStraightBonus5;
+        displayColorBonuses[0] = displayColorBonus1;
+        displayColorBonuses[1] = displayColorBonus2;
+        displayColorBonuses[2] = displayColorBonus3;
+        displayColorBonuses[3] = displayColorBonus4;
+        displayColorBonuses[4] = displayColorBonus5;
+        nbcancelStraightBonuses = 0;
+        nbdisplayColorBonuses = 0;
+        nbdoubleStraightBonuses = 0;
+    }
+
     public void round1(){roundMax = 1;}
-    
-    public void round2(){roundMax = 2;}
     
     public void round3(){roundMax = 3;}
 
-    public void round4(){roundMax = 4;}
-
     public void round5(){roundMax = 5;}
-    
-    public void round6(){roundMax = 6;}
+
+    public void mute(){
+        AudioListener.volume = 0;
+    }
+
+    public void unmute(){
+        if(AudioListener.volume == 0){
+            AudioListener.volume = 1;
+        }else{
+            AudioListener.volume = setVolume;
+        }
+    }
 }

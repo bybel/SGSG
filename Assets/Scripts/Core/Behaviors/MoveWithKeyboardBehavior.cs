@@ -6,15 +6,8 @@ public enum InputKeyboard {
     wasd = 1, arrows = 0
 };
 
-public enum InputColor {
-    blue = 0, purple = 1
-};
-
-
-
 public class MoveWithKeyboardBehavior : AgentBehaviour {
     public InputKeyboard inputKeyboard;
-    public InputColor inputColor;
     public GameObject theGame;
 
     //    private static bool chColor = false;
@@ -89,18 +82,7 @@ public class MoveWithKeyboardBehavior : AgentBehaviour {
 //        chCmd = true;
     }
 
-    public void setColorBlue(){
-        inputColor = InputColor.blue;
-//        chColor = true;
-    }
-
-    public void setColorPurple(){
-        inputColor = InputColor.purple;
-//        chColor = true;
-    }
-
     public void noChoice() {
 //        chCmd = false;
-//        chColor = false;
     }
 }

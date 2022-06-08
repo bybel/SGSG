@@ -96,7 +96,7 @@ public class RoundDisplay : MonoBehaviour
         for(int i=0; i<min(colorInRound, 5); ++i){
             colorsBack[i].SetActive(false);
         }
-        for(int i=colorInRound; i<roundMax; ++i){
+        for(int i=colorInRound; i<5; ++i){
             colorsBack[i].SetActive(true);
         }
     }
