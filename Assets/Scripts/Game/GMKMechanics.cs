@@ -78,11 +78,14 @@ public class GMKMechanics : MonoBehaviour
     public int straight1;
     public int straight2;
     private bool accelOnCourt;
+    private float timerColor1;
+    private float timerColor2;
+    private bool isdis1;
+    private bool isdis2;
 
     // Start is called before the first frame update
     void Start()
     {
-        roundMax = 5;
         setVolume = AudioListener.volume;
         rd = new Random();
         key1 = p1.GetComponent<MoveWithKeyboardBehavior>();
@@ -113,19 +116,39 @@ public class GMKMechanics : MonoBehaviour
                             timer = TIME_IN_POINT;
                             obstacle.active(true);
                             newBonus();
+                            if(timerColor1>0f){
+                                key1.setColor(colors[0,colorInRound-1]);
+                            } if(timerColor2>0f){
+                                key2.setColor(colors[1,colorInRound-1]);
+                            }
                         }
                     } else {
                         checkPlayers();
                         ++colorInRound;
                         timer = TIME_IN_POINT;
-                        key1.setColor();
-                        key2.setColor();
                         newBonus();
+                        if(timerColor1>0f){
+                            key1.setColor(colors[0,colorInRound-1]);
+                        } if(timerColor2>0f){
+                            key2.setColor(colors[1,colorInRound-1]);
+                        }
                     }
                 }
                 obstacle.accelerateObstacle(0);
             } else {
                 timer -= Time.deltaTime;
+                if(timerColor1>0f){
+                    timerColor1 -= Time.deltaTime;
+                } else if(isdis1){
+                    key1.setColor();
+                    isdis1 = false;
+                }
+                if(timerColor2>0f){
+                    timerColor2 -= Time.deltaTime;
+                } else if(isdis2){
+                    key2.setColor();
+                    isdis2 = false;
+                }
             }
         }
     }
@@ -258,9 +281,13 @@ public class GMKMechanics : MonoBehaviour
 
     private void displayColor(int player){
         if(player==1){
+            timerColor1 += 6f;
             key1.setColor(colors[0,colorInRound-1]);
+            isdis1 = true;
         } else{
+            timerColor2 += 6f;
             key2.setColor(colors[1,colorInRound-1]);
+            isdis2 = true;
         }
     }
 
@@ -297,7 +324,7 @@ public class GMKMechanics : MonoBehaviour
                     int i = -1;
                     while(cancelStraightBonusesActive[++i]);
                     cancelStraightBonusesActive[i] = true;
-                    toDisp = cancelStraightBonuses[i].transform.gameObject;
+                    toDisp = cancelStraightBonuses[i];
                     ++nbcancelStraightBonuses;
                 }
             } else if(index==1){
@@ -307,7 +334,7 @@ public class GMKMechanics : MonoBehaviour
                     int i = -1;
                     while(doubleStraightBonusesActive[++i]);
                     doubleStraightBonusesActive[i] = true;
-                    toDisp = doubleStraightBonuses[i].transform.gameObject;
+                    toDisp = doubleStraightBonuses[i];
                     ++nbdoubleStraightBonuses;
                 }
             } else if(index==2){
@@ -317,7 +344,7 @@ public class GMKMechanics : MonoBehaviour
                     int i = -1;
                     while(displayColorBonusesActive[++i]);
                     displayColorBonusesActive[i] = true;
-                    toDisp = displayColorBonuses[i].transform.gameObject;
+                    toDisp = displayColorBonuses[i];
                     ++nbdisplayColorBonuses;
                 }
             } else {
@@ -402,6 +429,9 @@ public class GMKMechanics : MonoBehaviour
 
     public void game_reset() 
     { 
+        timerColor1 = 0f;
+        timerColor2 = 0f;
+        roundMax = 5;
         float xmid = mid.transform.position.x;
         float ymid = mid.transform.position.y;
         float zmid = mid.transform.position.z;
@@ -430,7 +460,6 @@ public class GMKMechanics : MonoBehaviour
         key1 = p1.GetComponent<MoveWithKeyboardBehavior>();
         key2 = p2.GetComponent<MoveWithKeyboardBehavior>();
         obstacle = obstacleObject.GetComponent<ObstacleBehavior>();
-        accelOnCourt = false;
         xmin = xminObj.transform.position.x;
         xmax = xmaxObj.transform.position.x;
         zmin = zminObj.transform.position.z;
@@ -450,9 +479,25 @@ public class GMKMechanics : MonoBehaviour
         displayColorBonuses[2] = displayColorBonus3;
         displayColorBonuses[3] = displayColorBonus4;
         displayColorBonuses[4] = displayColorBonus5;
+        disactiveAllBonuses();
         nbcancelStraightBonuses = 0;
         nbdisplayColorBonuses = 0;
         nbdoubleStraightBonuses = 0;
+        accelOnCourt = false;
+        isdis1 = false;
+        isdis2 = false;
+    }
+
+    private void disactiveAllBonuses(){
+        for (int i=0; i<5; ++i){
+            cancelStraightBonuses[i].SetActive(false);
+            cancelStraightBonusesActive[i] = false;
+            doubleStraightBonuses[i].SetActive(false);
+            doubleStraightBonusesActive[i] = false;
+            displayColorBonuses[i].SetActive(false);
+            displayColorBonusesActive[i] = false;
+        }
+        accelerateObstacleBonus.SetActive(false);
     }
 
     public void round1(){roundMax = 1;}

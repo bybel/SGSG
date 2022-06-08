@@ -24,7 +24,7 @@ MonoBehaviour:
   m_MinSize: {x: 679, y: 342}
   m_MaxSize: {x: 12004, y: 8042}
   vertical: 0
-  controlID: 75492
+  controlID: 76281
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -94,17 +94,17 @@ MonoBehaviour:
       y: 21
       width: 397.33334
       height: 258
-    m_Scale: {x: 1.3421296, y: 1.34213}
-    m_Translation: {x: 198.6667, y: 129}
+    m_Scale: {x: 1.34213, y: 1.34213}
+    m_Translation: {x: 198.66669, y: 129}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -148.02348
+      x: -148.02344
       y: -96.11588
-      width: 296.04694
+      width: 296.04684
       height: 192.23177
     m_MinimalGUI: 1
   m_defaultScale: 1
@@ -138,7 +138,7 @@ MonoBehaviour:
   m_MinSize: {x: 403, y: 342}
   m_MaxSize: {x: 8003, y: 8042}
   vertical: 1
-  controlID: 75493
+  controlID: 76282
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -163,7 +163,7 @@ MonoBehaviour:
   m_MinSize: {x: 403, y: 221}
   m_MaxSize: {x: 8003, y: 4021}
   vertical: 0
-  controlID: 75465
+  controlID: 76283
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -217,7 +217,7 @@ MonoBehaviour:
   m_ViewDataDictionary: {fileID: 0}
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 330}
+      scrollPos: {x: 0, y: 606}
       m_SelectedIDs: 
       m_LastClickedID: 0
       m_ExpandedIDs: 6ce5feffcefaffff70fbffff72fbffffd2590000d6590000185a0000965a0000925b0000d65b0000285c0000625c0000865c0000d65d0000805e0000965e0000e05e0000
@@ -406,8 +406,8 @@ MonoBehaviour:
     y: 300
     width: 764
     height: 279
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 101, y: 121}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 11}
   m_Panes:
   - {fileID: 10}
@@ -595,8 +595,8 @@ MonoBehaviour:
     y: 0
     width: 516
     height: 579
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 13}
@@ -633,8 +633,8 @@ MonoBehaviour:
     m_CachedPref: 160
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
-  m_LastInspectedObjectInstanceID: 23064
-  m_LastVerticalScrollValue: 0
+  m_LastInspectedObjectInstanceID: 23702
+  m_LastVerticalScrollValue: 1120
   m_GlobalObjectId: 
   m_LockTracker:
     m_IsLocked: 0
