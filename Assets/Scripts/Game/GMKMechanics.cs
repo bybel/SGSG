@@ -427,6 +427,18 @@ public class GMKMechanics : MonoBehaviour
         isPlaying = true;
     }
 
+    public void game_easy(){
+
+    }
+
+    public void game_medium(){
+        
+    }
+
+    public void game_hard(){
+        
+    }
+
     public void game_reset() 
     { 
         timerColor1 = 0f;
