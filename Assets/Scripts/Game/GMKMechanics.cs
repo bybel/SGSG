@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = System.Random;
 
+public enum Difficulty {
+    easy = 2, medium = 1, hard = 0
+};
+
 public class GMKMechanics : MonoBehaviour
 {
     public float par = 2.5f;
@@ -82,6 +86,7 @@ public class GMKMechanics : MonoBehaviour
     private float timerColor2;
     private bool isdis1;
     private bool isdis2;
+    private Difficulty difficulty;
 
     // Start is called before the first frame update
     void Start()
@@ -269,7 +274,6 @@ public class GMKMechanics : MonoBehaviour
     }
 
     private void doubleStraight(int player){
-        Debug.Log("double " + player);
         if(player==1){
             p1Score += straight1;
             straight1 *= 2;
@@ -308,6 +312,7 @@ public class GMKMechanics : MonoBehaviour
     }
 
     private void newBonus(){
+        if(difficulty != Difficulty.hard) return;
         if(nbcancelStraightBonuses>4 && nbdisplayColorBonuses>4 && nbdoubleStraightBonuses>4 && accelOnCourt) return;
 
         float spawnX = rand(xmin + par, xmax - par);
@@ -428,15 +433,17 @@ public class GMKMechanics : MonoBehaviour
     }
 
     public void game_easy(){
-
+        difficulty = Difficulty.easy;
     }
 
     public void game_medium(){
-        
+        difficulty = Difficulty.medium;
+        obstacleObject.SetActive(true);
     }
 
     public void game_hard(){
-        
+        difficulty = Difficulty.hard;
+        obstacleObject.SetActive(true);
     }
 
     public void game_reset() 
@@ -498,6 +505,7 @@ public class GMKMechanics : MonoBehaviour
         accelOnCourt = false;
         isdis1 = false;
         isdis2 = false;
+        obstacleObject.SetActive(false);
     }
 
     private void disactiveAllBonuses(){
