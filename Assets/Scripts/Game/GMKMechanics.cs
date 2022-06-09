@@ -23,6 +23,8 @@ public class GMKMechanics : MonoBehaviour
     public GameObject smallGreen;
     public GameObject bigGreen;
     public GameObject obstacleObject;
+    public GameObject obstacleCellulo;
+    public GameObject obstacleLeds;
     public GameObject cancelStraightBonus1;
     public GameObject cancelStraightBonus2;
     public GameObject cancelStraightBonus3;
@@ -438,12 +440,17 @@ public class GMKMechanics : MonoBehaviour
 
     public void game_medium(){
         difficulty = Difficulty.medium;
-        obstacleObject.SetActive(true);
+        activeObstacle();
     }
 
     public void game_hard(){
         difficulty = Difficulty.hard;
-        obstacleObject.SetActive(true);
+        activeObstacle();
+    }
+    
+    private void activeObstacle(){
+        obstacleCellulo.SetActive(true);
+        obstacleLeds.SetActive(true);
     }
 
     public void game_reset() 
@@ -505,7 +512,8 @@ public class GMKMechanics : MonoBehaviour
         accelOnCourt = false;
         isdis1 = false;
         isdis2 = false;
-        obstacleObject.SetActive(false);
+        obstacleCellulo.SetActive(false);
+        obstacleLeds.SetActive(false);
     }
 
     private void disactiveAllBonuses(){
