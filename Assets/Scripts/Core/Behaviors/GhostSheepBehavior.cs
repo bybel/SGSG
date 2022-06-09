@@ -16,7 +16,7 @@ public class GhostSheepBehavior : AgentBehaviour
     private Vector3 position;
     private Vector3 closest;
     private GameObject closestPlayer;
-    private Vector3 pos1;
+    private Vector3 pos1; 
     private Vector3 pos2;
     private float dis1;
     private float dis2;

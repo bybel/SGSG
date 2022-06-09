@@ -89,6 +89,12 @@ public class GMKMechanics : MonoBehaviour
     private bool isdis1;
     private bool isdis2;
     private Difficulty difficulty;
+    public AudioSource beep;
+    public AudioSource boop;
+    public AudioSource killStreak_bonus;
+    public AudioSource color_bonus;
+    public AudioSource speed_bonus;
+    public AudioSource double_bonus;
 
     // Start is called before the first frame update
     void Start()
@@ -105,6 +111,8 @@ public class GMKMechanics : MonoBehaviour
     {
         if(isPlaying)
         {
+            
+
             if(timer <= 0f) 
             {
                 //End of the game
@@ -112,6 +120,8 @@ public class GMKMechanics : MonoBehaviour
                     gameOver.SetActive(true);
                     inGameCanvas.SetActive(false);
                     gui.SetActive(false);
+                    isPlaying = false;
+                    boop.Play();
 //                    game_pause();
                 } else {
                     //End of a round
@@ -134,16 +144,23 @@ public class GMKMechanics : MonoBehaviour
                         ++colorInRound;
                         timer = TIME_IN_POINT;
                         newBonus();
+                        boop.Play();
                         if(timerColor1>0f){
                             key1.setColor(colors[0,colorInRound-1]);
                         } if(timerColor2>0f){
                             key2.setColor(colors[1,colorInRound-1]);
                         }
+                        speed_bonus.Stop();
                     }
                 }
                 obstacle.accelerateObstacle(0);
             } else {
+                if(timer<=((int)timer)+(Time.deltaTime) && timer>((int)timer)-(Time.deltaTime)) {
+                    beep.Play();
+                }
+                  
                 timer -= Time.deltaTime;
+                
                 if(timerColor1>0f){
                     timerColor1 -= Time.deltaTime;
                 } else if(isdis1){
@@ -211,6 +228,7 @@ public class GMKMechanics : MonoBehaviour
     }
     private void startRound(){
         if(timerStart <= 0f){
+            speed_bonus.Stop();
             checkPlayers();
             timerStart = 7f;
             obstacle.active(false);
@@ -230,16 +248,22 @@ public class GMKMechanics : MonoBehaviour
         } else {
             if(timerStart==7f){
                 //envoyer le lourd son et mettre couleur normale
+                boop.Play();
                 key1.setColor();
                 key2.setColor();
-            } else if(timerStart<=1f+(Time.deltaTime/2) && timerStart>=1f-(Time.deltaTime/2)){
+            } else if(timerStart<=1f+(Time.deltaTime) && timerStart>1f-(Time.deltaTime)){
                 //envoyer le lourd son et mettre couleur normale
+                boop.Play();
                 key1.setColor();
                 key2.setColor();
             } else if(timerStart <= 6f && timerStart >= 1f){
                 //mettre la couleur avec un  modulo sur le timeStart
-                key1.setColor(colors[0,(int)(6-timerStart)]);
-                key2.setColor(colors[1,(int)(6-timerStart)]);
+                if(timerStart<=((int)timerStart+1)+(Time.deltaTime) && timerStart>((int)timerStart+1)-(Time.deltaTime)){
+                    key1.setColor(colors[0,(int)(6-timerStart)]);
+                    key2.setColor(colors[1,(int)(6-timerStart)]);
+                    beep.Play();
+                }
+                
             }
             timerStart -= Time.deltaTime;
         }
@@ -257,18 +281,22 @@ public class GMKMechanics : MonoBehaviour
 
     public void collected(int player, string kind, string tag){
         if(kind.Equals("double")){
+            double_bonus.Play();
             doubleStraight(player);
             doubleStraightBonusesActive[int.Parse(tag)] = false;
             --nbdoubleStraightBonuses;
         } else if(kind.Equals("display")){
+            color_bonus.Play();
             displayColor(player);
             displayColorBonusesActive[int.Parse(tag)] = false;
             --nbdisplayColorBonuses;
         } else if(kind.Equals("cancel")){
+            killStreak_bonus.Play();
             cancelStraight(player);
             cancelStraightBonusesActive[int.Parse(tag)] = false;
             --nbcancelStraightBonuses;
         } else{
+            speed_bonus.Play();
             accelerateObstacle(player);
             accelOnCourt = false;
         }
@@ -383,7 +411,7 @@ public class GMKMechanics : MonoBehaviour
     }
 
     public int getTimer(){
-        return (int) timer;
+        return timer<0f ? 0 : (int) timer + 1;
     }
 
     private string strColor(int c){
@@ -476,7 +504,7 @@ public class GMKMechanics : MonoBehaviour
         key2.setColor();
 
         colorInRound = 6;
-        timer = 0f;
+        timer = -0.5f;
         timerStart = 0f;
         round = 0;
         roundMax = 5;
@@ -545,4 +573,5 @@ public class GMKMechanics : MonoBehaviour
             AudioListener.volume = setVolume;
         }
     }
+
 }
