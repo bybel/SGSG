@@ -66,12 +66,12 @@ public class MoveWithKeyboardBehavior : AgentBehaviour {
 
     private Color getColor(int c){
         switch(c) {
-            case 0: return Color.blue; break;
-            case 1: return Color.green; break;
-            case 2: return Color.yellow; break;
-            case 3: return Color.red; break;
-            case 4: return Color.magenta; break;
-            case 5: return new Color(1, 0.5f, 0, 1); break;
+            case 0: return Color.blue; 
+            case 1: return Color.green; 
+            case 2: return Color.yellow; 
+            case 3: return Color.red; 
+            case 4: return Color.magenta; 
+            case 5: return new Color(1, 0.5f, 0, 1); 
             default: return Color.white;
         }
     }

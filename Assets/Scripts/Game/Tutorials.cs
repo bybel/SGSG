@@ -4,11 +4,11 @@ using UnityEngine;
 using Random = System.Random;
 
 public enum BasicStates {
-    arrows = 0, red = 1, wasd = 2, obstacle = 3, comb = 4
+    start = 0, arrows = 1, red = 2, wasd = 3, obstacle = 4, comb = 5
 };
 
 public enum BonusStates {
-    color = 0, twice = 1, cancel = 2, accel = 3
+    start = 0, color = 1, twice = 2, cancel = 3, accel = 4
 };
 
 public class Tutorials : MonoBehaviour
@@ -59,6 +59,8 @@ public class Tutorials : MonoBehaviour
     public GameObject doubleTutoText;
     public GameObject cancelTutoText;
     public GameObject finishTutoText;
+    public GameObject box;
+    public GameObject ok_button;
     
     private float setVolume;
     private Random rd;
@@ -93,28 +95,25 @@ public class Tutorials : MonoBehaviour
         key1 = p1.GetComponent<MoveWithKeyboardBehavior>();
         key2 = p2.GetComponent<MoveWithKeyboardBehavior>();
         obstacle = obstacleObject.GetComponent<ObstacleBehavior>();
-    }
-
-    // Update is called once per frame
+    }// Update is called once per frame
     void Update()
     {
         if(cgt){
             if(bonusTuto){
+                ++bonusState;
                 updateBonusTuto();
             } else if(baseTuto){
+                ++basicState;
                 updateBaseTuto();
             }
         } else if(baseTuto && active) {
             if(timer < 0f){
                 if(basicState == BasicStates.arrows){
-                    basicState = BasicStates.red;
-                    cgt = true;
+                    activeBox(redTutoText);
                 } else if(basicState == BasicStates.wasd){
-                    basicState = BasicStates.obstacle;
-                    cgt = true;
+                    activeBox(obstacleTutoText);
                 } else if(basicState == BasicStates.obstacle){
-                    basicState = BasicStates.comb;
-                    cgt = true;
+                    activeBox(combTutoText);
                 } else if(basicState == BasicStates.comb) {
                     if (colorInRound == 0){
                         startRound();
@@ -175,50 +174,46 @@ public class Tutorials : MonoBehaviour
         return goodPosition;
     }
 
+    private void activeBox(GameObject text){
+        box.SetActive(true);
+        text.SetActive(true);
+        active = false;
+    }
+
+    public void ok(){
+        cgt = true;
+        active = true;
+        box.SetActive(false);
+        disactiveAllText();
+    }
+
     private void updateBonusTuto(){
         if(bonusState == BonusStates.color){
-            colorTutoText.SetActive(true);
             spawn(displayColorBonus);
             displayCollected = false;
         } else if(bonusState == BonusStates.twice){
-            colorTutoText.SetActive(false);
-            doubleTutoText.SetActive(true);
             spawn(doubleStraightBonus);
         } else if(bonusState == BonusStates.cancel){
             placeAdv();
-            cancelTutoText.SetActive(true);
-            doubleTutoText.SetActive(false);
             spawn(cancelStraightBonus);
         } else if(bonusState == BonusStates.accel){
             placeObs();
-            cancelTutoText.SetActive(false);
-            accelTutoText.SetActive(true);
             accelCollected = false;
             spawn(accelerateObstacleBonus);
         }
         cgt = false;
     }
-
     private void updateBaseTuto(){
         if(basicState == BasicStates.arrows){
             timer = 5f;
-            arrowsTutoText.SetActive(true);
         } else if(basicState == BasicStates.red){
-            arrowsTutoText.SetActive(false);
-            redTutoText.SetActive(true);
         } else if(basicState == BasicStates.wasd){
             timer = 5f;
             placeAdv();
-            redTutoText.SetActive(false);
-            wasdTutoText.SetActive(true);
         } else if(basicState == BasicStates.obstacle){
             timer = 10f;
             placeObs();
-            wasdTutoText.SetActive(false);
-            obstacleTutoText.SetActive(true);
         } else if(basicState == BasicStates.comb){
-            obstacleTutoText.SetActive(false);
-            combTutoText.SetActive(true);
         }
         cgt = false;
     }
@@ -233,11 +228,13 @@ public class Tutorials : MonoBehaviour
     public void initBonusTutorial(){
         bonusTuto = true;
         active = true;
+        activeBox(colorTutoText);
     }
 
     public void initBasicsTutorial(){
         baseTuto = true;
         active = true;
+        activeBox(arrowsTutoText);
     }
 
     public void exitTuto(){
@@ -299,9 +296,8 @@ public class Tutorials : MonoBehaviour
         zmin = zminObj.transform.position.z;
         zmax = zmaxObj.transform.position.z;
         disactiveAll();
-        basicState = BasicStates.arrows;
-        bonusState = BonusStates.color;
-        cgt = true;
+        basicState = BasicStates.start;
+        bonusState = BonusStates.start;
     }
 
     private void disactiveAll(){
@@ -315,6 +311,10 @@ public class Tutorials : MonoBehaviour
         doubleStraightBonus.SetActive(false);
         displayColorBonus.SetActive(false);
 
+        disactiveAllText();
+    }
+
+    private void disactiveAllText(){
         texts.SetActive(true);
         arrowsTutoText.SetActive(false);
         wasdTutoText.SetActive(false);
@@ -326,7 +326,6 @@ public class Tutorials : MonoBehaviour
         doubleTutoText.SetActive(false);
         cancelTutoText.SetActive(false);
         finishTutoText.SetActive(false);
-
     }
 
     private float rand(float min, float max){
@@ -335,19 +334,16 @@ public class Tutorials : MonoBehaviour
     }
 
     public void collected(string kind){
-        Debug.Log(kind);
         if(kind.Equals("double")){
             p1Score += straight1;
             straight1 *= 2;
-            cgt = true;
-            bonusState = BonusStates.cancel;
+            activeBox(cancelTutoText);
         } else if(kind.Equals("display")){
             key1.setColor(3);
             displayCollected = true;
         } else if(kind.Equals("cancel")){
             straight2 = 1;
-            cgt = true;
-            bonusState = BonusStates.accel;
+            activeBox(accelTutoText);
         } else {
             obstacle.accelerateObstacle(2);
             accelCollected = true;
@@ -356,13 +352,11 @@ public class Tutorials : MonoBehaviour
 
     public void reached(){
         if(bonusTuto && displayCollected){
-            cgt = true;
+            activeBox(doubleTutoText);
             displayCollected = false;
             key1.setColor();
-            bonusState = BonusStates.twice;
         } else if (baseTuto && basicState == BasicStates.red){
-            cgt = true;
-            basicState = BasicStates.wasd;
+            activeBox(wasdTutoText);
         }
     }
 
@@ -381,10 +375,9 @@ public class Tutorials : MonoBehaviour
 
     private void finishTuto(){
         active = false;
-        accelTutoText.SetActive(false);
-        combTutoText.SetActive(false);
-        finishTutoText.SetActive(true);
+        activeBox(finishTutoText);
         placeAdv();
+        ok_button.SetActive(false);
     }
 
     public int getTimer(){
