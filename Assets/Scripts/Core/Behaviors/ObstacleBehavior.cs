@@ -16,12 +16,14 @@ public class ObstacleBehavior : AgentBehaviour
     private float dis1;
     private float dis2;
     private GMKMechanics gameScript;
+    private Tutorials tuto;
     private int accelVsPlayer;
 
     // Start is called before the first frame update
     void Start()
     {
         gameScript = theGame.GetComponent<GMKMechanics>();
+        tuto = theGame.GetComponent<Tutorials>();
         isActive = false;
         accelVsPlayer = 0;
     }
@@ -29,7 +31,7 @@ public class ObstacleBehavior : AgentBehaviour
     // Update is called once per frame
     public override Steering GetSteering()
     {
-        if (gameScript.isPlaying && isActive){
+        if ((tuto.active || gameScript.isPlaying) && isActive){
             locatePlayers();
             closest.Normalize();
             if(accelVsPlayer>0){
@@ -80,7 +82,11 @@ public class ObstacleBehavior : AgentBehaviour
         string tag = collision.gameObject.tag;
         if (tag.Equals("Player1") || tag.Equals("Player2"))
         {
-            gameScript.loosePoint(tag);
+            if(tuto.active) {
+                tuto.touched(tag);
+            } else {
+                gameScript.loosePoint(tag);
+            }
         }
     }
 }

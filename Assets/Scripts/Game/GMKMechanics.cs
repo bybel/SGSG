@@ -9,7 +9,7 @@ public enum Difficulty {
 
 public class GMKMechanics : MonoBehaviour
 {
-    public float par = 2.5f;
+    private float par = 2.5f;
     public GameObject smallRed;
     public GameObject bigRed;
     public GameObject smallYellow;
@@ -500,6 +500,8 @@ public class GMKMechanics : MonoBehaviour
         p2Score = 0;
 
         isPlaying = false;
+        key1 = p1.GetComponent<MoveWithKeyboardBehavior>();
+        key2 = p2.GetComponent<MoveWithKeyboardBehavior>();
         key1.setColor();
         key2.setColor();
 
@@ -511,8 +513,6 @@ public class GMKMechanics : MonoBehaviour
         straight1 = 1;
         straight2 = 1;
         rd = new Random();
-        key1 = p1.GetComponent<MoveWithKeyboardBehavior>();
-        key2 = p2.GetComponent<MoveWithKeyboardBehavior>();
         obstacle = obstacleObject.GetComponent<ObstacleBehavior>();
         xmin = xminObj.transform.position.x;
         xmax = xmaxObj.transform.position.x;

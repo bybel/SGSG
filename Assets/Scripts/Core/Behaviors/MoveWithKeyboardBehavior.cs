@@ -16,7 +16,7 @@ public class MoveWithKeyboardBehavior : AgentBehaviour {
     public override Steering GetSteering()
     {   
         Steering steering = new Steering();
-        if (theGame.GetComponent<GMKMechanics>().isPlaying)
+        if (theGame.GetComponent<GMKMechanics>().isPlaying || theGame.GetComponent<Tutorials>().active)
         {
             //implement your code here
 

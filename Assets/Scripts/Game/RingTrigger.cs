@@ -5,11 +5,14 @@ using UnityEngine;
 public class RingTrigger : MonoBehaviour
 {
     private bool[] contained;
+    public GameObject theGame;
+    private Tutorials tuto;
 
     // Start is called before the first frame update
     void Start()
     {
        contained = new bool[2];
+       tuto = theGame.GetComponent<Tutorials>();
     }
 
     // Update is called once per frame
@@ -19,6 +22,9 @@ public class RingTrigger : MonoBehaviour
     }
     
     void OnTriggerEnter(Collider other){
+        if(tuto.active && (tuto.bonusState == BonusStates.color || tuto.basicState == BasicStates.red) && gameObject.tag.Equals("sRed")){
+            tuto.reached();
+        }
         if(other.transform.parent.tag.Equals("Player1")){
             contained[0] = true;
         } 
