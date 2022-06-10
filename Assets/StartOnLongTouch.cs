@@ -9,23 +9,21 @@ public class StartOnLongTouch : MonoBehaviour
     public GameObject p2;
     public GameObject startButton;
     public GameObject theGame;
-    private GameMechanics gameMechanics;
+    private GMKMechanics gameMechanics;
     public GameObject Choices;
     public GameObject inGameButtons;
     public GameObject pause;
     public GameObject resume;
     public GameObject mute;
     public GameObject unmute;
-    public GameObject continu;
-    public GameObject UI;
-    public GameObject connButton;
+    public GameObject image;
     private CelluloAgentRigidBody cStart1;
     private CelluloAgentRigidBody cStart2;
 
     // Start is called before the first frame update
     void Start()
     {
-        gameMechanics = theGame.GetComponent<GameMechanics>();
+        gameMechanics = theGame.GetComponent<GMKMechanics>();
         cStart1 = p1.GetComponent<CelluloAgentRigidBody>();
         cStart2 = p2.GetComponent<CelluloAgentRigidBody>(); 
     }
@@ -33,8 +31,6 @@ public class StartOnLongTouch : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        
         if(cStart1.hasLongPressed && cStart2.hasLongPressed) {
             Debug.Log("ASS");
             
@@ -45,10 +41,8 @@ public class StartOnLongTouch : MonoBehaviour
             mute.SetActive(true);
             unmute.SetActive(false);
             inGameButtons.SetActive(true);
-            continu.SetActive(false);
-            UI.SetActive(true);
-            connButton.SetActive(true);
-            gameMechanics.game_init();
+            image.SetActive(false);
+            gameMechanics.game_play();
             cStart1.hasLongPressed = false;
             cStart2.hasLongPressed = false;
         }

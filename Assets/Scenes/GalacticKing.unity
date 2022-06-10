@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4410354, g: 0.48978138, b: 0.56986445, a: 1}
+  m_IndirectSpecularColor: {r: 0.44103542, g: 0.48978144, b: 0.5698645, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -9576,24 +9576,22 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 660132443}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5d5e87be4ec75344b3c11d6b4059d01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   p1: {fileID: 660132444}
   p2: {fileID: 1843889314}
-  startButton: {fileID: 0}
-  theGame: {fileID: 0}
-  Choices: {fileID: 0}
-  inGameButtons: {fileID: 0}
-  pause: {fileID: 0}
-  resume: {fileID: 0}
-  mute: {fileID: 0}
-  unmute: {fileID: 0}
-  continu: {fileID: 0}
-  UI: {fileID: 0}
-  connButton: {fileID: 660132442}
+  startButton: {fileID: 1422761320}
+  theGame: {fileID: 1260747038}
+  Choices: {fileID: 388719065}
+  inGameButtons: {fileID: 2078904156}
+  pause: {fileID: 97208970}
+  resume: {fileID: 1582897263}
+  mute: {fileID: 574267667}
+  unmute: {fileID: 389379381}
+  image: {fileID: 1163454184}
 --- !u!82 &660132448
 AudioSource:
   m_ObjectHideFlags: 0
@@ -18953,18 +18951,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GameMechanics, Assembly-CSharp
-        m_MethodName: game_init
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 2078904156}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -19000,18 +18986,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
         m_CallState: 2
       - m_Target: {fileID: 389379381}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine

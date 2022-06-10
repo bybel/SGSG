@@ -64,7 +64,7 @@ public class CelluloAgentRigidBody : CelluloAgent
         velocity = transform.parent.InverseTransformDirection(_rigidBody.velocity);
     }
 
-    public void OnLongTouch(int key) {
+    protected override void OnLongTouch(int key) {
         hasLongPressed = true;
     }
 

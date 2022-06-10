@@ -126,6 +126,8 @@ public class GMKMechanics : MonoBehaviour
                     gui.SetActive(false);
                     isPlaying = false;
                     boop.Play();
+                    key1.vibrate();
+                    key2.vibrate();
                     
 //                    game_pause();
                 } else {
@@ -150,6 +152,8 @@ public class GMKMechanics : MonoBehaviour
                         timer = TIME_IN_POINT;
                         newBonus();
                         boop.Play();
+                        key1.vibrate();
+                        key2.vibrate();
                         if(timerColor1>0f){
                             key1.setColor(colors[0,colorInRound-1]);
                         } if(timerColor2>0f){
@@ -256,11 +260,15 @@ public class GMKMechanics : MonoBehaviour
             if(timerStart==7f){
                 //envoyer le lourd son et mettre couleur normale
                 boop.Play();
+                key1.vibrate();
+                key2.vibrate();
                 key1.setColor();
                 key2.setColor();
             } else if(timerStart<=1f+(Time.deltaTime) && timerStart>1f-(Time.deltaTime)){
                 //envoyer le lourd son et mettre couleur normale
                 boop.Play();
+                key1.vibrate();
+                key2.vibrate();
                 key1.setColor();
                 key2.setColor();
             } else if(timerStart <= 6f && timerStart >= 1f){
