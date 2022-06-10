@@ -17,6 +17,7 @@ public class StartOnLongTouch : MonoBehaviour
     public GameObject mute;
     public GameObject unmute;
     public GameObject image;
+    public GameObject hud;
     private CelluloAgentRigidBody cStart1;
     private CelluloAgentRigidBody cStart2;
 
@@ -45,6 +46,8 @@ public class StartOnLongTouch : MonoBehaviour
             gameMechanics.game_play();
             cStart1.hasLongPressed = false;
             cStart2.hasLongPressed = false;
+            gameMechanics.game_medium();
+            hud.SetActive(true);
         }
     }
 }

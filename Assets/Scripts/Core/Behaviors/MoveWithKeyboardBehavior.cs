@@ -55,19 +55,24 @@ public class MoveWithKeyboardBehavior : AgentBehaviour {
 
     public void setColor()
     { 
-        int timer = theGame.GetComponent<GMKMechanics>().getTimer();
-        agent.SetVisualEffect(VisualEffect.VisualEffectProgress, Color.white, (int)((timer-1) * 42.5));
+        GMKMechanics game = theGame.GetComponent<GMKMechanics>();
+        int timer = game.getTimer();
+        agent.SetVisualEffect(VisualEffect.VisualEffectProgress, getColor(game.getColor(gameObject.tag)), (int)((timer-1) * 42.5));
     }
 
     public void setColor(int color){
+        agent.SetVisualEffect(VisualEffect.VisualEffectConstAll, getColor(color), 0);
+    }
 
-        switch(color) {
-            case 0: agent.SetVisualEffect(VisualEffect.VisualEffectConstAll, Color.blue, 0); break;
-            case 1: agent.SetVisualEffect(VisualEffect.VisualEffectConstAll, Color.green, 0); break;
-            case 2: agent.SetVisualEffect(VisualEffect.VisualEffectConstAll, Color.yellow, 0); break;
-            case 3: agent.SetVisualEffect(VisualEffect.VisualEffectConstAll, Color.red, 0); break;
-            case 4: agent.SetVisualEffect(VisualEffect.VisualEffectConstAll, Color.magenta, 0); break;
-            default: agent.SetVisualEffect(VisualEffect.VisualEffectConstAll, new Color(1, 0.5f, 0, 1), 0); break;
+    private Color getColor(int c){
+        switch(c) {
+            case 0: return Color.blue; break;
+            case 1: return Color.green; break;
+            case 2: return Color.yellow; break;
+            case 3: return Color.red; break;
+            case 4: return Color.magenta; break;
+            case 5: return new Color(1, 0.5f, 0, 1); break;
+            default: return Color.white;
         }
     }
 

@@ -140,11 +140,8 @@ public class GMKMechanics : MonoBehaviour
                             timer = TIME_IN_POINT;
                             obstacle.active(true);
                             newBonus();
-                            if(timerColor1>0f){
-                                key1.setColor(colors[0,colorInRound-1]);
-                            } if(timerColor2>0f){
-                                key2.setColor(colors[1,colorInRound-1]);
-                            }
+                            key1.setColor();
+                            key2.setColor();
                         }
                     } else {
                         checkPlayers();
@@ -154,11 +151,8 @@ public class GMKMechanics : MonoBehaviour
                         boop.Play();
                         key1.vibrate();
                         key2.vibrate();
-                        if(timerColor1>0f){
-                            key1.setColor(colors[0,colorInRound-1]);
-                        } if(timerColor2>0f){
-                            key2.setColor(colors[1,colorInRound-1]);
-                        }
+                        key1.setColor();
+                        key2.setColor();
                         speed_bonus.Stop();
                     }
                 }
@@ -211,6 +205,16 @@ public class GMKMechanics : MonoBehaviour
             }
         }
     }
+
+    public int getColor(string tag){
+        if (tag.Equals("Player1") && timerColor1>0f){
+            return colors[0,colorInRound-1];
+        } else if(tag.Equals("Player2") && timerColor2>0f){
+            return colors[1,colorInRound-1];
+        }
+        return -1;
+    }
+
     private bool checkPosition(int player, int color){
         bool goodPosition = false;
         //blue green yellow red magenta orange
