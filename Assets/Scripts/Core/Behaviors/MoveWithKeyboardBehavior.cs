@@ -10,8 +10,7 @@ public class MoveWithKeyboardBehavior : AgentBehaviour {
     public InputKeyboard inputKeyboard;
     public GameObject theGame;
 
-    //    private static bool chColor = false;
-    //    private static bool chCmd = false;
+    private static bool chCmd = false;
 
     public override Steering GetSteering()
     {   
@@ -23,20 +22,20 @@ public class MoveWithKeyboardBehavior : AgentBehaviour {
             float horizontal;
             float vertical;
 
-//            if(chCmd) {
-//                if (inputKeyboard == InputKeyboard.arrows)
-//                {
-//                    horizontal = Input.GetAxis("Horizontal");
-//                    vertical = Input.GetAxis("Vertical");
-//                }
-/**               else
+            if(chCmd) {
+                if (inputKeyboard == InputKeyboard.arrows)
+                {
+                    horizontal = Input.GetAxis("Horizontal");
+                    vertical = Input.GetAxis("Vertical");
+                }
+                else
                  {
                     horizontal = Input.GetAxis("H2"); 
                     vertical = Input.GetAxis("V2");
                 }
             }
             else 
-            {*/
+            {
                 if (gameObject.tag.Equals("Player1"))
                 {
                     horizontal = Input.GetAxis("Horizontal");
@@ -45,8 +44,7 @@ public class MoveWithKeyboardBehavior : AgentBehaviour {
                      horizontal = Input.GetAxis("H2");
                     vertical = Input.GetAxis("V2");
                 }
-//            }
-//            setColor();
+            }
 
             steering.linear = new Vector3(horizontal, 0, vertical) * agent.maxAccel;
             steering.linear = this.transform.parent.TransformDirection(Vector3.ClampMagnitude(steering.linear, agent.maxAccel));
@@ -76,15 +74,15 @@ public class MoveWithKeyboardBehavior : AgentBehaviour {
 
     public void setCmdWASD(){
         inputKeyboard = InputKeyboard.wasd;
-//        chCmd = true;
+        chCmd = true;
     }
     
     public void setCmdArrows(){
         inputKeyboard = InputKeyboard.arrows;
-//        chCmd = true;
+        chCmd = true;
     }
 
     public void noChoice() {
-//        chCmd = false;
+        chCmd = false;
     }
 }

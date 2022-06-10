@@ -8,6 +8,8 @@ using UnityEngine;
 public class CelluloAgentRigidBody : CelluloAgent
 {
     private Rigidbody _rigidBody;
+    
+    public bool hasLongPressed;
 
     protected override void Awake()
 
@@ -60,6 +62,10 @@ public class CelluloAgentRigidBody : CelluloAgent
     {
         rotation = _rigidBody.angularVelocity.y;
         velocity = transform.parent.InverseTransformDirection(_rigidBody.velocity);
+    }
+
+    public void OnLongTouch(int key) {
+        hasLongPressed = true;
     }
 
 }
