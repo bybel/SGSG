@@ -57,7 +57,9 @@ public class MoveWithKeyboardBehavior : AgentBehaviour {
 
     public void setColor()
     { 
-        agent.SetVisualEffect(VisualEffect.VisualEffectProgress, Color.white, 43);
+        int timer = theGame.GetComponent<GMKMechanics>().getTimer();
+        agent.SetVisualEffect(VisualEffect.VisualEffectProgress, Color.white, (int)((timer-1) * 42.5));
+        Debug.Log(timer + ", " + (int)(255 - timer * 42.5));
     }
 
     public void setColor(int color){

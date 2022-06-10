@@ -96,6 +96,9 @@ public class GMKMechanics : MonoBehaviour
     public AudioSource speed_bonus;
     public AudioSource double_bonus;
 
+    public GameObject Image;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -118,10 +121,12 @@ public class GMKMechanics : MonoBehaviour
                 //End of the game
                 if (round>=roundMax && colorInRound >= COLORS_IN_ROUND){
                     gameOver.SetActive(true);
+                    Image.SetActive(true);
                     inGameCanvas.SetActive(false);
                     gui.SetActive(false);
                     isPlaying = false;
                     boop.Play();
+                    
 //                    game_pause();
                 } else {
                     //End of a round
@@ -157,6 +162,8 @@ public class GMKMechanics : MonoBehaviour
             } else {
                 if(timer<=((int)timer)+(Time.deltaTime) && timer>((int)timer)-(Time.deltaTime)) {
                     beep.Play();
+                    key1.setColor();
+                    key2.setColor();
                 }
                   
                 timer -= Time.deltaTime;

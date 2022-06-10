@@ -383,6 +383,7 @@ public class Tutorials : MonoBehaviour
         accelTutoText.SetActive(false);
         combTutoText.SetActive(false);
         finishTutoText.SetActive(true);
+        placeAdv();
     }
 
     public int getTimer(){
