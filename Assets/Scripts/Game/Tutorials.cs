@@ -244,6 +244,7 @@ public class Tutorials : MonoBehaviour
         bonusTuto = false;
         baseTuto = false;
         active = false;
+        placeAdv();
     }
 
     private void placeAdv(){
