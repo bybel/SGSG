@@ -86,8 +86,8 @@ public class GMKMechanics : MonoBehaviour
     private bool accelOnCourt;
     private float timerColor1;
     private float timerColor2;
-    private bool isdis1;
-    private bool isdis2;
+    private float timerAccel1;
+    private float timerAccel2;
     private Difficulty difficulty;
     public AudioSource beep;
     public AudioSource boop;
@@ -95,6 +95,8 @@ public class GMKMechanics : MonoBehaviour
     public AudioSource color_bonus;
     public AudioSource speed_bonus;
     public AudioSource double_bonus;
+    private bool isacc1;
+    private bool isacc2;
 
     public GameObject Image;
 
@@ -156,7 +158,6 @@ public class GMKMechanics : MonoBehaviour
                         speed_bonus.Stop();
                     }
                 }
-                obstacle.accelerateObstacle(0);
             } else {
                 if(timer<=((int)timer)+(Time.deltaTime) && timer>((int)timer)-(Time.deltaTime)) {
                     beep.Play();
@@ -168,15 +169,22 @@ public class GMKMechanics : MonoBehaviour
                 
                 if(timerColor1>0f){
                     timerColor1 -= Time.deltaTime;
-                } else if(isdis1){
-                    key1.setColor();
-                    isdis1 = false;
                 }
                 if(timerColor2>0f){
                     timerColor2 -= Time.deltaTime;
-                } else if(isdis2){
-                    key2.setColor();
-                    isdis2 = false;
+                } 
+
+                if(timerAccel1>0f){
+                    timerAccel1 -= Time.deltaTime;
+                } else if(isacc1){
+                    obstacle.accelerateObstacle(0);
+                    isacc1 = false;
+                }
+                if(timerAccel2>0f){
+                    timerAccel2 -= Time.deltaTime;
+                } else if(isacc2){
+                    obstacle.accelerateObstacle(0);
+                    isacc2 = false;
                 }
             }
         }
@@ -289,6 +297,9 @@ public class GMKMechanics : MonoBehaviour
     }
 
     public void loosePoint(string tag){
+        obstacle.accelerateObstacle(0);
+        isacc1 = false;
+        isacc2 = false;
         if(tag.Equals("Player1")){
             --p1Score;
             straight1 = 1;
@@ -336,11 +347,9 @@ public class GMKMechanics : MonoBehaviour
         if(player==1){
             timerColor1 += 6f;
             key1.setColor(colors[0,colorInRound-1]);
-            isdis1 = true;
         } else{
             timerColor2 += 6f;
             key2.setColor(colors[1,colorInRound-1]);
-            isdis2 = true;
         }
     }
 
@@ -355,8 +364,12 @@ public class GMKMechanics : MonoBehaviour
     private void accelerateObstacle(int player) {
         if(player==1){
             obstacle.accelerateObstacle(2);
+            timerAccel1 += 6f;
+            isacc1 = true;
         } else{
             obstacle.accelerateObstacle(1);
+            timerAccel2 += 6f;
+            isacc2 = true;
         }
     }
 
@@ -370,7 +383,7 @@ public class GMKMechanics : MonoBehaviour
         int index = -1;
         GameObject toDisp = accelerateObstacleBonus;
         while(index < 0){
-            index = rd.Next(accelOnCourt ? 3 : 4);
+            index = rd.Next((accelOnCourt || isacc1 || isacc2) ? 3 : 4);
             if(index==0){
                 if(nbcancelStraightBonuses > 4) {
                     index = -1;
@@ -504,6 +517,8 @@ public class GMKMechanics : MonoBehaviour
     { 
         timerColor1 = 0f;
         timerColor2 = 0f;
+        timerAccel1 = 0f;
+        timerAccel2 = 0f;
         roundMax = 5;
         float xmid = mid.transform.position.x;
         float ymid = mid.transform.position.y;
@@ -557,10 +572,10 @@ public class GMKMechanics : MonoBehaviour
         nbdisplayColorBonuses = 0;
         nbdoubleStraightBonuses = 0;
         accelOnCourt = false;
-        isdis1 = false;
-        isdis2 = false;
         obstacleCellulo.SetActive(false);
         obstacleLeds.SetActive(false);
+        isacc1 = false;
+        isacc2 = false;
     }
 
     private void disactiveAllBonuses(){

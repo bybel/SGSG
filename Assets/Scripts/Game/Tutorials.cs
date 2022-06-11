@@ -84,7 +84,7 @@ public class Tutorials : MonoBehaviour
     private bool cgt;
     private bool accelCollected;
     private bool displayCollected;
-    private float par = 2.5f;
+    private Vector3 midPos;
 
 
     // Start is called before the first frame update
@@ -177,6 +177,7 @@ public class Tutorials : MonoBehaviour
     private void activeBox(GameObject text){
         box.SetActive(true);
         text.SetActive(true);
+        p1.transform.position = midPos;
         active = false;
     }
 
@@ -194,9 +195,9 @@ public class Tutorials : MonoBehaviour
         } else if(bonusState == BonusStates.twice){
             spawn(doubleStraightBonus);
         } else if(bonusState == BonusStates.cancel){
-            placeAdv();
             spawn(cancelStraightBonus);
         } else if(bonusState == BonusStates.accel){
+            placeAdv();
             placeObs();
             accelCollected = false;
             spawn(accelerateObstacleBonus);
@@ -213,15 +214,17 @@ public class Tutorials : MonoBehaviour
         } else if(basicState == BasicStates.obstacle){
             timer = 10f;
             placeObs();
-        } else if(basicState == BasicStates.comb){
-        }
+            placeAdv();
+        } 
         cgt = false;
     }
 
     private void spawn (GameObject obj){
-        float spawnX = rand(xmin + par, xmax - par);
-        float spawnZ = rand(zmin + par, zmax - par);
-        obj.transform.position = new Vector3(spawnX, p1.transform.position.y, spawnZ);
+        float xmid = mid.transform.position.x;
+        float zmid = mid.transform.position.z;
+        float y = p1.transform.position.y;
+
+        obj.transform.position = new Vector3(xmid-4f, p1.transform.position.y, zmid+3f);
         obj.SetActive(true);
     }
 
@@ -261,7 +264,7 @@ public class Tutorials : MonoBehaviour
         float zmid = mid.transform.position.z;
         float y = p1.transform.position.y;
 
-        obstacleObject.transform.position = new Vector3(xmid, y, zmid + 3.0f);
+        obstacleObject.transform.position = new Vector3(xmid - 9.0f, y, zmid - 3.0f);
         obstacleCellulo.SetActive(true);
         obstacleLeds.SetActive(true);
         obstacle.active(true);
@@ -274,7 +277,8 @@ public class Tutorials : MonoBehaviour
 
         float y = p1.transform.position.y;
 
-        p1.transform.position = new Vector3(xmid, y, zmid);
+        midPos = new Vector3(xmid, y, zmid);
+        p1.transform.position = midPos;
 
         p1Score = 12;
         p2Score = 17;
