@@ -85,11 +85,14 @@ public class Tutorials : MonoBehaviour
     private bool accelCollected;
     private bool displayCollected;
     private Vector3 midPos;
+    private GMKMechanics gmk_script;
+
 
 
     // Start is called before the first frame update
     void Start()
     {
+        gmk_script = gameObject.GetComponent<GMKMechanics>();
         setVolume = AudioListener.volume;
         rd = new Random();
         key1 = p1.GetComponent<MoveWithKeyboardBehavior>();
@@ -131,6 +134,9 @@ public class Tutorials : MonoBehaviour
                     }
                 }
             } else {
+                if(timer<=((int)timer)+(Time.deltaTime) && timer>((int)timer)-(Time.deltaTime)){
+                    gmk_script.beep.Play();
+                }
                 timer -= Time.deltaTime;
             }
         }
@@ -339,16 +345,20 @@ public class Tutorials : MonoBehaviour
 
     public void collected(string kind){
         if(kind.Equals("double")){
+            gmk_script.double_bonus.Play();
             p1Score += straight1;
             straight1 *= 2;
             activeBox(cancelTutoText);
         } else if(kind.Equals("display")){
+            gmk_script.color_bonus.Play();
             key1.setColor(3);
             displayCollected = true;
         } else if(kind.Equals("cancel")){
+            gmk_script.killStreak_bonus.Play();
             straight2 = 1;
             activeBox(accelTutoText);
         } else {
+            gmk_script.speed_bonus.Play();
             obstacle.accelerateObstacle(2);
             accelCollected = true;
         }
@@ -378,6 +388,7 @@ public class Tutorials : MonoBehaviour
     }
 
     private void finishTuto(){
+        gmk_script.speed_bonus.Stop();
         active = false;
         activeBox(finishTutoText);
         placeAdv();
@@ -406,14 +417,17 @@ public class Tutorials : MonoBehaviour
         } else {
             if(timerStart==5f){
                 //envoyer le lourd son et mettre couleur normale
+                gmk_script.boop.Play();
                 key1.setColor();
             } else if(timerStart<=1f+(Time.deltaTime) && timerStart>1f-(Time.deltaTime)){
                 //envoyer le lourd son et mettre couleur normale
                 key1.setColor();
+                gmk_script.boop.Play();
             } else if(timerStart <= 4f && timerStart >= 1f){
                 //mettre la couleur avec un  modulo sur le timeStart
                 if(timerStart<=((int)timerStart+1)+(Time.deltaTime) && timerStart>((int)timerStart+1)-(Time.deltaTime)){
                     key1.setColor(colors[(int)(4-timerStart)]);
+                    gmk_script.beep.Play();
                 }
                 
             }

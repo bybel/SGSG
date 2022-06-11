@@ -18,6 +18,7 @@ public class ObstacleBehavior : AgentBehaviour
     private GMKMechanics gameScript;
     private Tutorials tuto;
     private int accelVsPlayer;
+    public AudioSource looseSound;
 
     // Start is called before the first frame update
     void Start()
@@ -82,6 +83,7 @@ public class ObstacleBehavior : AgentBehaviour
         string tag = collision.gameObject.tag;
         if (tag.Equals("Player1") || tag.Equals("Player2"))
         {
+            looseSound.Play();
             if(tuto.active) {
                 tuto.touched(tag);
             } else {
