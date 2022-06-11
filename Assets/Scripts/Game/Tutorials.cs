@@ -220,7 +220,8 @@ public class Tutorials : MonoBehaviour
         } else if(basicState == BasicStates.obstacle){
             timer = 10f;
             placeObs();
-            placeAdv();
+            advCellulo.SetActive(false);
+            advLeds.SetActive(false);
         } 
         cgt = false;
     }
